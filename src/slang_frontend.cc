@@ -1611,6 +1611,16 @@ ir::Value EvalContext::operator()(ast::Expression const &expr)
 					auto arg = call.arguments()[0];
 					auto sig = (*this)(*arg);
 					ret = netlist.Clog2(sig, (int)call.type->getBitstreamWidth());
+				} else if (name == "$onehot") {
+					ast_invariant(expr, call.arguments().size() == 1);
+					auto arg = call.arguments()[0];
+					auto sig = (*this)(*arg);
+					ret = netlist.OneHot(sig, (int)call.type->getBitstreamWidth());
+				} else if (name == "$onehot0") {
+					ast_invariant(expr, call.arguments().size() == 1);
+					auto arg = call.arguments()[0];
+					auto sig = (*this)(*arg);
+					ret = netlist.OneHot0(sig, (int)call.type->getBitstreamWidth());
 				} else if (name == "$past") {
 					ret = handle_past(*this, call);
 				} else if (name == "$rose") {

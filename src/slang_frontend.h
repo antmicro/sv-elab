@@ -583,6 +583,8 @@ struct GraphBuilder {
 	ir::Value Biop(ast::BinaryOperator op, ir::Value a, ir::Value b,
 				 bool a_signed, bool b_signed, uint64_t y_width);
 	ir::Value CountOnes(ir::Value sig, uint64_t result_width);
+	ir::Value OneHot(ir::Value sig, uint64_t result_width);
+	ir::Value OneHot0(ir::Value sig, uint64_t result_width);
 	ir::Value Clog2(ir::Value sig, uint64_t result_width);
 
 	void add_input(std::string_view name, ir::Value signal);

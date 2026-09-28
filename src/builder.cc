@@ -373,6 +373,24 @@ ir::Value GraphBuilder::CountOnes(ir::Value sig, uint64_t result_width)
 	return ret;
 }
 
+ir::Value GraphBuilder::OneHot(ir::Value sig, uint64_t result_width)
+{
+    ir::Value count;
+	ir::Value ret;
+    count = CountOnes(sig, result_width);
+    ret = Eq(count, ir::Const(1, result_width));
+	return ret;
+}
+
+ir::Value GraphBuilder::OneHot0(ir::Value sig, uint64_t result_width)
+{
+    ir::Value count;
+	ir::Value ret;
+    count = CountOnes(sig, result_width);
+    ret = Le(count, ir::Const(1, result_width), false);
+	return ret;
+}
+
 ir::Value GraphBuilder::Clog2(ir::Value sig, uint64_t result_width)
 {
 	int width = sig.size();
